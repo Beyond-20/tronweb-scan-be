@@ -10,7 +10,7 @@ import ip from 'ip';
 //import { connectToDatabase } from "./database/config";
 
 const app = express()
-const port = 8080;;
+const port = 8000;;
 const urlPath = '/scan';
 
 
