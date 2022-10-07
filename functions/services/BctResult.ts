@@ -29,7 +29,7 @@ export class BaccaratResult {
                 if ((c === "j") || (c === "q") || (c === "k") || (c === "a"))
                 { CardFigure = 10; }
                 else if (c === "a") 
-                { CardFigure = 1; }
+                { CardFigure = 10; }
             }
 
             if (CardFigure > 0)
