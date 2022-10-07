@@ -1,0 +1,8 @@
+POST http://localhost:8080/v1/Games
+
+content-type: application/json
+
+{
+    "secureToken": "61bc828787fd38dd6d007c4c",
+    "hash": "045d3a5276bd0245996cab1b89c3e459"
+}
