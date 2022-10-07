@@ -26,10 +26,8 @@ export class BaccaratResult {
             if (CardNumber.test(c)) { CardFigure = Number(c); }
             else 
             {
-                if ((c === "j") || (c === "q") || (c === "k") || (c === "a"))
-                { CardFigure = 10; }
-                else if (c === "a") 
-                { CardFigure = 10; }
+                if ((c === "b") || (c === "c") || (c === "d") || (c === "e"))
+                { CardFigure = 10; }               
             }
 
             if (CardFigure > 0)
