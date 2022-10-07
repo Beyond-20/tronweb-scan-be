@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { checkHash } from '../controller/hashController';
+// import { checkHash } from '../controller/hashController';
 import { Send400ErrorResponse } from './returnHelper';
 
 
@@ -23,14 +23,14 @@ export async function validateReqParams(req: Request, res: Response, schema: any
         return true;
 }
 
-export async function  validateHash  ( object:any,res:Response)  {
-    console.log('checking hash')
+// export async function  validateHash  ( object:any,res:Response)  {
+//     console.log('checking hash')
 
-    var secret_key:string = process.env.SECRET_KEY??"f397ded6280448869d76d9dfc88c48df";
-    var validHash = await checkHash(object, secret_key);
-    console.log(`valid hash ${validHash}`)
-    return validHash;
-}
+//     var secret_key:string = process.env.SECRET_KEY??"f397ded6280448869d76d9dfc88c48df";
+//     var validHash = await checkHash(object, secret_key);
+//     console.log(`valid hash ${validHash}`)
+//     return validHash;
+// }
 
  
 
