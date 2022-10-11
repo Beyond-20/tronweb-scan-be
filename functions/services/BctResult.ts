@@ -13,16 +13,18 @@ export class BaccaratResult {
         console.log('------------------------------------------------')
         console.log(hash)        
 
-        let FinalHashToCalculate ='';
-        let PlayerCardCombinations = '';
-        let BankerCardCombinations = '';
+        let FinalHashToCalculate ='';        
+        let PlayerCardCombinations: any = [];
+        let BankerCardCombinations: any = [];
+        let playerHandTotal = 0;
+        let bankerHandTotal = 0;
         let AddPlayerCard = false; 
         let AddBankerCard = false;
         let CheckWinner = false;
+        
         for (let c of hash) {
             let CardFigure = 0;
          
-            
             if (CardNumber.test(c)) { CardFigure = Number(c); }
             else 
             {
@@ -36,20 +38,20 @@ export class BaccaratResult {
 
                 //First Card 
                 if (AddIndex === 0)
-                {PlayerCard += CardFigure;  AddIndex += 1; PlayerCardCombinations += c; }
+                {PlayerCard += CardFigure;  AddIndex += 1; PlayerCardCombinations.push(c); }
                                 
                 //Second Card
                 else if (AddIndex === 1)
-                { BankerCard += CardFigure; AddIndex += 1;BankerCardCombinations += c; }                
+                { BankerCard += CardFigure; AddIndex += 1;BankerCardCombinations.push(c); }                
                 
                 //Third Card
                 else if (AddIndex === 2)
-                {PlayerCard += CardFigure;  AddIndex += 1;PlayerCardCombinations += c ; }
+                {PlayerCard += CardFigure;  AddIndex += 1;PlayerCardCombinations.push(c) ; }
 
                 //Fourth Card
                 else if (AddIndex === 3)
                 {
-                    BankerCard += CardFigure;  AddIndex += 1; BankerCardCombinations += c ;
+                    BankerCard += CardFigure;  AddIndex += 1; BankerCardCombinations.push(c) ;
 
                     //Decide If To Add Card For Dealer / Player
                     let playerHandTotal = (PlayerCard  % 10);
@@ -67,7 +69,7 @@ export class BaccaratResult {
                     AddIndex += 1;
 
                     if (AddPlayerCard)
-                    {PlayerCard += CardFigure;   PlayerCardCombinations += c ; }
+                    {PlayerCard += CardFigure;   PlayerCardCombinations.push(c); }
 
                     if (!AddBankerCard)
                     { CheckWinner = true;}  
@@ -75,14 +77,14 @@ export class BaccaratResult {
 
                 else if (AddIndex === 5)
                 {
-                    if (AddBankerCard) { BankerCard += CardFigure; AddIndex += 1; CheckWinner = true; BankerCardCombinations += c ;}                
+                    if (AddBankerCard) { BankerCard += CardFigure; AddIndex += 1; CheckWinner = true; BankerCardCombinations.push(c) ;}                
                 }
                 
                 if (CheckWinner)
                 {
                     console.log("CheckWinner")
-                    let playerHandTotal = (PlayerCard  % 10);
-                    let bankerHandTotal = (BankerCard  % 10);
+                    playerHandTotal = (PlayerCard  % 10);
+                    bankerHandTotal = (BankerCard  % 10);
                     ReturnWinner = this.determineWinner(bankerHandTotal, playerHandTotal); 
                     
                     console.log('FinalHash:' + FinalHashToCalculate)
@@ -98,7 +100,15 @@ export class BaccaratResult {
             
         }
         console.log('------------------------------------------------')
-        return ReturnWinner;
+        var bctresult = {
+            winner : ReturnWinner,
+            BankerCard:BankerCardCombinations,
+            PlayerCard:PlayerCardCombinations,
+            BankerTotal:bankerHandTotal,
+            PlayerTotal:playerHandTotal                   
+        }     
+
+        return bctresult;
       } catch (error) {      
         return "ERROR";
       }
