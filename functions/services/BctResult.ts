@@ -10,8 +10,8 @@ export class BaccaratResult {
         var PlayerCard = 0;    
         let AddIndex :number = 0;
 
-        console.log('------------------------------------------------')
-        console.log(hash)        
+        // console.log('------------------------------------------------')
+        // console.log(hash)        
 
         let FinalHashToCalculate ='';        
         let PlayerCardCombinations: any = [];
@@ -119,7 +119,7 @@ export class BaccaratResult {
             }
             
         }
-        console.log('------------------------------------------------')
+        // console.log('------------------------------------------------')
         var bctresult = {
             winner : ReturnWinner,
             BankerCard:BankerCardCombinations,

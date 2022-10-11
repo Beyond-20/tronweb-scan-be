@@ -13,18 +13,25 @@ export async function ScanLatestTX  (req:Request, res:Response) {
      try {      
       const CurrBlock = await Tron.getCurrentBlock();      
       console.log(CurrBlock.block_header.raw_data.number);
-      let BlockInfo = await Tron.getTransactionFromBlock(Number(CurrBlock.block_header.raw_data.number));            
+      let TotalBlock:any = []; 
       //BlockInfo = BlockInfo.slice(0,3);
 
-      //res.send(BlockInfo)
+      for (let i = 0; i < 10; i++) {
+        let BlockInfo = await Tron.getTransactionFromBlock(Number(CurrBlock.block_header.raw_data.number) - i);            
+        BlockInfo?.forEach((doc:any) => { 
+          TotalBlock.push(doc.txID)
+        });        
+      }      
+
+      
       var _PlayerWin = 0;
       var _BankerWin = 0;
       var _TieWin = 0;
       var _NoResult = 0;      
 
       var _results: any = [];      
-      BlockInfo?.forEach((doc:any) => { 
-        var WinResult:any = BaccaratResult.getWinner(doc.txID);       
+      TotalBlock?.forEach((doc:any) => {         
+        var WinResult:any = BaccaratResult.getWinner(doc);       
         console.log(WinResult)    
         switch(WinResult.winner)
         {
@@ -42,7 +49,7 @@ export async function ScanLatestTX  (req:Request, res:Response) {
                 break;
         }
         var tx = {
-          txid : doc.txID,
+          txid : doc,
           win:WinResult,      
         }      
         _results.push(tx);               
