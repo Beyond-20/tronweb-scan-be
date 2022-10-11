@@ -26,7 +26,7 @@ export async function ScanLatestTX  (req:Request, res:Response) {
       BlockInfo?.forEach((doc:any) => { 
         var WinResult:any = BaccaratResult.getWinner(doc.txID);       
         console.log(WinResult)    
-        switch(WinResult)
+        switch(WinResult.winner)
         {
           case Winner.Banker:
              _BankerWin += 1;     
